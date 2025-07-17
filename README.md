@@ -70,6 +70,15 @@ GET http://localhost:8080/repositories/example-user
 | 404         | User not found.                                        |
 | 500         | Unexpected error.                                      |
 
+## Integration Test
+
+The project includes an integration test for the happy path, using JUnit 5 and Spring Boot Test to verify the full request flow, including communication with the real GitHub's API.
+To run the integration test:
+
+```bash
+mvn verify
+```
+
 ## Project structure
 
 ```bash
