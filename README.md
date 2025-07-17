@@ -1,0 +1,95 @@
+# GitHub Proxy API Project
+
+A simple Spring Boot application that proxies GitHub's public REST API to fetch repositories and their branches for a given user.
+
+## Technologies
+
+- Java 21
+- Spring Boot 3.5.3
+- RestTemplate
+- JUnit 5
+- Maven
+
+## Installation and Launch
+
+Requirements:
+- Java 21+
+- Maven
+
+Build and run the project:
+```bash
+mvn clean package
+java -jar target/githubapi-0.0.1-SNAPSHOT.jar
+```
+
+The application will start at: http://localhost:8080
+
+## Example request
+
+```
+GET http://localhost:8080/repositories/example-user
+```
+
+## Example response
+
+```json
+{
+    "ownerLogin": "ArdianM90",
+    "repositories": [
+        {
+            "name": "battleships",
+            "branches": [
+                {
+                    "name": "game-summary",
+                    "lastCommitSha": "192a101b4270c745027da1a3bbc482dfcf46ac92"
+                },
+                {
+                    "name": "main",
+                    "lastCommitSha": "05370dac12dd94cf8643d62b0093ebd78289070d"
+                }
+            ]
+        },
+        {
+            "name": "github-proxy-api",
+            "branches": [
+                {
+                    "name": "master",
+                    "lastCommitSha": "b213efe1644a06bb6c9b5a8f2f9e58db8ce26ccb"
+                }
+            ]
+        }
+    ]
+}
+```
+
+## Error responses
+| Status code | Description                                            | 
+|-------------|--------------------------------------------------------|
+| 400         | Username must not be blank.                            | 
+| 403         | GitHub API rate limit exceeded (60 requests per hour). | 
+| 404         | User not found.                                        |
+| 500         | Unexpected error.                                      |
+
+## Project structure
+
+```bash
+\githubapi
+ |   AppConfig.java
+ |   GithubApiApplication.java
+ |   GitHubClient.java
+ |   RepositoryController.java
+ |   RepositoryService.java
+ |
+ \---dto
+      BranchDto.java
+      ErrorResponse.java
+      RepositoryDto.java
+      UserRepositoriesResponse.java
+```
+
+## Notes
+
+- The app communicates with GitHub's public REST API (no authentication). 
+- GitHub limits unauthenticated requests up to 60 requests per hour ([GitHub documentation](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28)).
+- In case GitHub rate limits (403), a proper message is returned.
+- The app follows clean code principles and keeps a flat structure to maintain readabilty.

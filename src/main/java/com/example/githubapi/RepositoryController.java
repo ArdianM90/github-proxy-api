@@ -25,7 +25,7 @@ public class RepositoryController {
         if (username == null || username.isBlank()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Username must not be blank");
+                    .body(new ErrorResponse("Username must not be blank."));
         }
         try {
             UserRepositoriesResponse response = repositoryService.getRepositoriesByUser(username);
