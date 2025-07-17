@@ -31,7 +31,10 @@ public class GitHubClient {
         try {
             JsonNode root = objectMapper.readTree(json);
             for (JsonNode repoNode : root) {
-                repositories.add(new RepositoryDto(repoNode.get("name").asText()));
+                boolean isFork = repoNode.get("fork").asBoolean();
+                if (!isFork) {
+                    repositories.add(new RepositoryDto(repoNode.get("name").asText()));
+                }
             }
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error parsing repositories response from GitHub", e);

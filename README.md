@@ -1,6 +1,6 @@
 # GitHub Proxy API Project
 
-A simple Spring Boot application that proxies GitHub's public REST API to fetch repositories and their branches for a given user.
+A simple Spring Boot application that proxies GitHub's public REST API to fetch repositories (which are not forks) and their branches for a given user.
 
 ## Technologies
 

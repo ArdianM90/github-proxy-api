@@ -25,7 +25,7 @@ public class RepositoryController {
         if (username == null || username.isBlank()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(new ErrorResponse("Username must not be blank."));
+                    .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Username must not be blank."));
         }
         try {
             UserRepositoriesResponse response = repositoryService.getRepositoriesByUser(username);
@@ -33,15 +33,15 @@ public class RepositoryController {
         } catch (HttpClientErrorException.Forbidden ex) {
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
-                    .body(new ErrorResponse("GitHub API rate limit exceeded."));
+                    .body(new ErrorResponse(HttpStatus.FORBIDDEN.value(), "GitHub API rate limit exceeded."));
         } catch (HttpClientErrorException.NotFound ex) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorResponse("User not found."));
+                    .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), "User not found."));
         } catch (Exception ex) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ErrorResponse("Unexpected error."));
+                    .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Unexpected error."));
         }
     }
 }
