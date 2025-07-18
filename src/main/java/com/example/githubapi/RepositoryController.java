@@ -30,6 +30,10 @@ public class RepositoryController {
         try {
             UserRepositoriesResponse response = repositoryService.getRepositoriesByUser(username);
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (HttpClientErrorException.Unauthorized ex) {
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Unauthorized – bad GitHub credentials."));
         } catch (HttpClientErrorException.Forbidden ex) {
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
