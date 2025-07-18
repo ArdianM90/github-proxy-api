@@ -68,13 +68,13 @@ GET http://localhost:8080/repositories/example-user
 ```
 
 ## Error responses
-| Status code | Description                                            | 
-|-------------|--------------------------------------------------------|
-| 400         | Username must not be blank.                            | 
-| 401         | Unauthorized – bad GitHub credentials.                 |
-| 403         | GitHub API rate limit exceeded (60 requests per hour). | 
-| 404         | User not found.                                        |
-| 500         | Unexpected error.                                      |
+| Status code | Description                                                                         | 
+|-------------|-------------------------------------------------------------------------------------|
+| 400         | Username must not be blank.                                                         | 
+| 401         | Unauthorized – bad GitHub credentials.                                              |
+| 403         | GitHub API rate limit exceeded (60 requests per hour for unauthenticated requests). | 
+| 404         | User not found.                                                                     |
+| 500         | Unexpected error.                                                                   |
 
 ## Integration Test
 
@@ -104,7 +104,7 @@ mvn verify
 
 ## Notes
 
-- The app communicates with GitHub's public REST API (no authentication). 
+- The app communicates with GitHub's public REST API (with or without authentication). 
 - GitHub limits unauthenticated requests up to 60 requests per hour ([GitHub documentation](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28)).
 - In case GitHub rate limits (403), a proper message is returned.
 - The app follows clean code principles and keeps a flat structure to maintain readabilty.
