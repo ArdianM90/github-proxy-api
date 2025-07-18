@@ -12,7 +12,7 @@ import java.time.Duration;
 @Configuration
 public class AppConfig {
 
-    @Value("${app.github.token}")
+    @Value("${app.github.token:}")
     private String githubToken;
 
     @Bean

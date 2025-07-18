@@ -17,8 +17,9 @@ Requirements:
 - Maven
 
 Before launching the application, set a personal GitHub token as an environment variable named `GITHUB_TOKEN`.
+[How to generate token?](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
-> ℹ️ Note: If you don't want to use authentication, you can remove the `${GITHUB_TOKEN}` part in `application.properties` file. In that case variable `app.github.token` should be present, but empty.
+> ℹ️ Note: If you don't want to use authentication, you can remove or comment the `app.github.token=${GITHUB_TOKEN}` line from `application.properties` file.
 
 Build and run the project:
 ```bash
