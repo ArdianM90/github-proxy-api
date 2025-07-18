@@ -16,6 +16,10 @@ Requirements:
 - Java 21+
 - Maven
 
+Before launching the application, set a personal GitHub token as an environment variable named `GITHUB_TOKEN`.
+
+> ℹ️ Note: If you don't want to use authentication, you can remove the `${GITHUB_TOKEN}` part in `application.properties` file. In that case variable `app.github.token` should be present, but empty.
+
 Build and run the project:
 ```bash
 mvn clean package
@@ -66,6 +70,7 @@ GET http://localhost:8080/repositories/example-user
 | Status code | Description                                            | 
 |-------------|--------------------------------------------------------|
 | 400         | Username must not be blank.                            | 
+| 401         | Unauthorized – bad GitHub credentials.                 |
 | 403         | GitHub API rate limit exceeded (60 requests per hour). | 
 | 404         | User not found.                                        |
 | 500         | Unexpected error.                                      |
